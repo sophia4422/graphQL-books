@@ -54,7 +54,17 @@ const book = async (_, { bookId }) => {
   }
 };
 
+const createBook = (_, { book }) => {
+  console.log(book);
+
+  return {
+    success: true,
+    message: "Successfully created book",
+  };
+};
+
 module.exports = {
   books,
   book,
+  createBook,
 };
