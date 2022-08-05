@@ -13,6 +13,7 @@ const typeDefs = gql`
   }
   type Query {
     books(searchTerm: String!): [Book]
+    book(bookId: ID!): Book
   }
 `;
 

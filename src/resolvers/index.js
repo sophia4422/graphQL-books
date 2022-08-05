@@ -1,8 +1,9 @@
-const { books } = require("./books");
+const { books, book } = require("./books");
 
 const resolvers = {
   Query: {
     books,
+    book,
   },
 };
 
