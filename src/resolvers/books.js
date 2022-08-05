@@ -1,26 +1,25 @@
-const books = () => {
-  return [
-    {
-      id: "123",
-      title: "Foo Bar",
+const axios = require("axios");
+const books = async (parent, { searchTerm }, context) => {
+  const { data } = await axios.get(
+    `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
+  );
+
+  const books = data?.items?.map((book) => {
+    return {
+      id: book?.id,
+      title: book?.volumeInfo?.title,
       authors: ["Fupa", "Woo"],
       description: "This is a description",
       pageCount: 222,
       categories: ["Coding"],
       averageRating: 2.5,
       isEbook: false,
-    },
-    {
-      id: "456",
-      title: "Foo Bob Smith",
-      authors: ["Dave", "Ishmael"],
-      description: "This is a book description",
-      pageCount: 224,
-      categories: ["Coding"],
-      averageRating: 5.0,
-      isEbook: true,
-    },
-  ];
+    };
+  });
+
+  console.log(books);
+
+  return books;
 };
 
 module.exports = {

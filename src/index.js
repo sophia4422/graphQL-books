@@ -11,6 +11,7 @@ const server = new ApolloServer({
 });
 
 const init = async () => {
+  //connect to MongoDB
   const { url } = await server.listen({ port: PORT });
   console.log(`🚀  Server ready at ${url}`);
 };

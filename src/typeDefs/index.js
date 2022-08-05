@@ -12,7 +12,7 @@ const typeDefs = gql`
     isEbook: Boolean
   }
   type Query {
-    books(searchTerm: String): [Book]
+    books(searchTerm: String!): [Book]
   }
 `;
 
