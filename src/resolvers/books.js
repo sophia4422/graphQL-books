@@ -1,5 +1,6 @@
 const { ApolloError } = require("apollo-server");
 const axios = require("axios");
+const { Book } = require("../models");
 
 const books = async (_, { searchTerm }) => {
   try {
@@ -54,8 +55,10 @@ const book = async (_, { bookId }) => {
   }
 };
 
-const createBook = (_, { book }) => {
+const createBook = async (_, { book }) => {
   console.log(book);
+
+  await Book.create();
 
   return {
     success: true,
@@ -63,8 +66,15 @@ const createBook = (_, { book }) => {
   };
 };
 
+const myBooks = async () => {
+  const books = await Book.find({});
+
+  return books;
+};
+
 module.exports = {
   books,
   book,
   createBook,
+  myBooks,
 };

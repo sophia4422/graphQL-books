@@ -1,9 +1,10 @@
-const { books, book, createBook } = require("./books");
+const { books, book, createBook, myBooks } = require("./books");
 
 const resolvers = {
   Query: {
     books,
     book,
+    myBooks,
   },
   Mutation: {
     createBook,
