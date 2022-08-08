@@ -13,8 +13,8 @@ const typeDefs = gql`
   }
 
   type Success {
-    success: Boolean
-    message: String
+    success: Boolean!
+    message: String!
   }
 
   input BookInput {

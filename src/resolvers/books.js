@@ -56,20 +56,30 @@ const book = async (_, { bookId }) => {
 };
 
 const createBook = async (_, { book }) => {
-  console.log(book);
+  try {
+    await Book.create(book);
 
-  await Book.create();
+    return {
+      success: true,
+      message: "Successfully created book",
+    };
+  } catch (error) {
+    console.log(`[ERROR]: failed to create book | ${error.message}`);
 
-  return {
-    success: true,
-    message: "Successfully created book",
-  };
+    return new ApolloError("Failed to create book");
+  }
 };
 
 const myBooks = async () => {
-  const books = await Book.find({});
+  try {
+    const books = await Book.find({});
 
-  return books;
+    return books;
+  } catch (error) {
+    console.log(`[ERROR]: failed to get my books | ${error.message}`);
+
+    return new ApolloError("Failed to get my books");
+  }
 };
 
 module.exports = {
