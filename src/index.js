@@ -1,4 +1,4 @@
-require("donenv").config();
+require("dotenv").config();
 const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
 
@@ -13,19 +13,24 @@ const server = new ApolloServer({
 });
 
 const init = async () => {
-  const DB_NAME = process.env.DB_NAME;
-  const MONGODB_URI =
-    process.env.MONGODB_URI || `mongodb://localhost:27017/${DB_NAME}`;
+  try {
+    const DB_NAME = process.env.DB_NAME;
+    const MONGODB_URI =
+      process.env.MONGODB_URI || `mongodb://localhost:27017/${DB_NAME}`;
 
-  const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  };
+    const options = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    };
 
-  await mongoose.connect(MONGODB_URI, options);
-  //connect to MongoDB
-  const { url } = await server.listen({ port: PORT });
-  console.log(`🚀  Server ready at ${url}`);
+    await mongoose.connect(MONGODB_URI, options);
+    //connect to MongoDB
+    const { url } = await server.listen({ port: PORT });
+
+    console.log(`🚀  Server ready at ${url}`);
+  } catch (error) {
+    console.log(`[ERROR]: Failed to start server || ${error.message}`);
+  }
 };
 
 init();
